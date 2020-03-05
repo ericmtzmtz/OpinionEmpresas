@@ -1,4 +1,5 @@
 from .db import db
+from flask import request
 import datetime
 from flask_bcrypt import generate_password_hash, check_password_hash
 
@@ -21,8 +22,9 @@ class Opinion(db.Document):
 
     title       = db.StringField(required=True)
     resume      = db.StringField(required=False)
-    publish_date= datetime.datetime.now()
+    publish_date= db.DateTimeField(default=datetime.datetime.now())
     points      = db.StringField(max_length=1, choices=puntuacion, required=True)
+    ip          = db.StringField(required=False)
     added_by    = db.ReferenceField('User')
     # empresa     = db.ReferenceField(Empresas)
 

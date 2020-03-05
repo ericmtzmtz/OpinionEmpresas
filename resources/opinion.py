@@ -15,7 +15,6 @@ class OpinionesApi(Resource):
         try:
             user_id     = get_jwt_identity()
             opiniones   = Opinion.objects.filter(added_by=user_id).to_json()
-            print(opiniones)
             return Response(opiniones, mimetype="application/json", status=200)
         except DoesNotExist:
             return 'Aun no hay opiniones'
@@ -27,15 +26,16 @@ class OpinionesApi(Resource):
         try:
             user_id = get_jwt_identity()
             body    = request.get_json()
+            ip      = request.environ.get('HTTP_X_REAL_IP', request.remote_addr)
             user    = User.objects.get(id=user_id)
-            opinion = Opinion(**body, added_by=user_id)
+            opinion = Opinion(**body, added_by=user_id, ip=ip)
             opinion.save()
             user.update(push__opiniones=opinion)
             user.save()
             id      = opinion.id
             return {'id': str(id)}, 200
         except(FieldDoesNotExist, ValidationError):
-            raise SchemaValidationError
+            raise SchemaValidationError + 'Remenber only number 1 to 5 in points'
         except Exception as e:
             raise InternalServerError
 
