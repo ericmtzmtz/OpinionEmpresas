@@ -1,5 +1,5 @@
 from flask import Response, request
-from database.models import Empresa, User
+from database.models import Opinion, User
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from flask_jwt_extended.exceptions import NoAuthorizationError
 from flask_restful import Resource
@@ -9,10 +9,18 @@ from resources.errors import SchemaValidationError, EmpresaAlreadyExistError,\
     EmpresaNotExistsError, InternalServerError, UpdatingEmpresaError, DeletingEmpresaError, UnauthorizedCreation
 
 
-class EmpresasApi(Resource):
+class OpinionesApi(Resource):
+    @jwt_required
     def get(self):
-        empresas = Empresa.objects().to_json()
-        return Response(empresas, mimetype="application/json", status=200)
+        try:
+            user_id     = get_jwt_identity()
+            opiniones   = Opinion.objects.filter(added_by=user_id).to_json()
+            print(opiniones)
+            return Response(opiniones, mimetype="application/json", status=200)
+        except DoesNotExist:
+            return 'Aun no hay opiniones'
+        except NoAuthorizationError:
+            return UnauthorizedCreation
 
     @jwt_required
     def post(self):
@@ -20,29 +28,25 @@ class EmpresasApi(Resource):
             user_id = get_jwt_identity()
             body    = request.get_json()
             user    = User.objects.get(id=user_id)
-            empresa = Empresa(**body, added_by=user_id)
-            empresa.save()
-            user.update(push__empresas=empresa)
+            opinion = Opinion(**body, added_by=user_id)
+            opinion.save()
+            user.update(push__opiniones=opinion)
             user.save()
-            id      = empresa.id
+            id      = opinion.id
             return {'id': str(id)}, 200
         except(FieldDoesNotExist, ValidationError):
             raise SchemaValidationError
-        except NotUniqueError:
-            raise EmpresaAlreadyExistError
-        except NoAuthorizationError:
-            raise UnauthorizedCreation
         except Exception as e:
             raise InternalServerError
 
-class EmpresaApi(Resource):
+class OpinionApi(Resource):
     @jwt_required
-    def put(self, id):
+    def update_opinion(self, id):
         try:
             user_id = get_jwt_identity()
-            empresa = Empresa.objects.get(id=id, added_by=user_id)
-            body    = request.get_json()
-            Empresa.objects.get(id=id).update(**body)
+            opinion = Opinion.objects.get(id=id, added_by=user_id)
+            body = request.get_json()
+            Opinion.objects.get(id=id).update(**body)
             return '', 200
         except InvalidQueryError:
             raise SchemaValidationError
@@ -51,22 +55,24 @@ class EmpresaApi(Resource):
         except Exception:
             raise InternalServerError
 
-    @jwt_required
-    def delete(self, id):
+    @jwt_required   
+    def delete_opinion(self, id):
         try:
             user_id = get_jwt_identity()
-            empresa = Empresa.objects.get(id=id, added_by=user_id)
-            empresa.delete()
+            opinion = Opinion.objects.get(id=id, added_by=user_id)
+            opinion.delete()
             return '', 200
         except DoesNotExist:
             raise DeletingEmpresaError
         except Exception:
             raise InternalServerError
 
-    def get(self, id):
+    @jwt_required
+    def get_opinion(self, id):
         try:
-            empresa = Empresa.objects.get(id=id).to_json()
-            return Response(empresa, mimetype="application/json", status=200)
+            user_id = get_jwt_identity()
+            opinion = Opinion.objects.get(id=id, added_by=user_id).to_json()
+            return Response(opinion, mimetype="application/json", status=200)
         except DoesNotExist:
             raise EmpresaNotExistsError
         except Exception:
