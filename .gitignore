@@ -1,0 +1,6 @@
+*.pyc
+*~
+frontend
+__pycache__
+env
+.vscode
