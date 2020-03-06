@@ -30,8 +30,8 @@ const EmpresasForm = (params) =>{
 					value={nameEmpresa}
 					name="nameEmpresa"
 					className="form-control"
-					placeholder="Add text here..."
-					aria-label="Add text here..."
+					placeholder="Add name here..."
+					aria-label="Add name here..."
 				/>
 			</div>
 			<div className="form-group">
@@ -41,7 +41,9 @@ const EmpresasForm = (params) =>{
 					onChange={handleChangeResume}
 					value={resumeEmpresa}
 					name="resumeEmpresa" 
-					className="form-control" 
+					className="form-control"
+					placeholder="Add resume here..."
+					aria-label="Add resume here..."
 					rows="3"
 				>
 				</textarea>

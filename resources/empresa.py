@@ -25,7 +25,7 @@ class EmpresasApi(Resource):
             user.update(push__empresas=empresa)
             user.save()
             id      = empresa.id
-            return {'id': str(id)}, 200
+            return {'id': str(id), 'message': 'Creation Successful'}, 200
         except(FieldDoesNotExist, ValidationError):
             raise SchemaValidationError
         except NotUniqueError:
@@ -57,7 +57,7 @@ class EmpresaApi(Resource):
             user_id = get_jwt_identity()
             empresa = Empresa.objects.get(id=id, added_by=user_id)
             empresa.delete()
-            return '', 200
+            return {"message": 'Delete Successful'} , 200
         except DoesNotExist:
             raise DeletingEmpresaError
         except Exception:
