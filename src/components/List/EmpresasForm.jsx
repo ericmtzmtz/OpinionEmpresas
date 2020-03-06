@@ -5,12 +5,10 @@ const EmpresasForm = (params) =>{
 	const [resumeEmpresa, setResumeEmpresa] = useState("")
 	
 	const handleChangeName = (e) => {
-		console.log(e.target)
 		setNameEmpresa(e.target.value);
 	}
 	
 	const handleChangeResume = (e) => {
-		console.log(e.target.value)
 		setResumeEmpresa(e.target.value)
 	 }
 

@@ -20,7 +20,6 @@ const List = () => {
   	}
 
 	const postEmpresas = (nameEmpresa, resumeEmpresa) => {
-		console.log(nameEmpresa, resumeEmpresa)
 		// Popup si el usuario envia un form vacio
 		if(!nameEmpresa){
 			setWarningMessage({
@@ -43,20 +42,17 @@ const List = () => {
 			}
 		}
 		axios(options).then(response => {
-			console.log(response)
 			if(response.statusText !== 'OK'){
 				throw Error(response.statusText)
 			}
 			axios.get(CONSTANTS.ENDPOINT.LIST + '/api/empresas/' + response.data.id).then(response2 =>{
-				console.log(response2.data)
 				setListItems([response2.data, ...listItems])
 			})
 		})
 		.catch(error => { 
-			console.log(error.message)
 			setWarningMessage({
 				warningMessageOpen: true,
-				warningMessageText: error.message
+				warningMessageText: error.response.data.message
 			})
 		})
 	}  
