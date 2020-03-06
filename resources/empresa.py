@@ -5,7 +5,7 @@ from flask_jwt_extended.exceptions import NoAuthorizationError
 from flask_restful import Resource
 from mongoengine.errors import FieldDoesNotExist, \
     NotUniqueError, DoesNotExist, ValidationError, InvalidQueryError
-from resources.errors import SchemaValidationError, EmpresaAlreadyExistError,\
+from resources.errors import SchemaValidationError, EmpresaAlreadyExistsError,\
     EmpresaNotExistsError, InternalServerError, UpdatingEmpresaError, DeletingEmpresaError, UnauthorizedCreation
 
 
@@ -29,7 +29,7 @@ class EmpresasApi(Resource):
         except(FieldDoesNotExist, ValidationError):
             raise SchemaValidationError
         except NotUniqueError:
-            raise EmpresaAlreadyExistError
+            raise EmpresaAlreadyExistsError
         except NoAuthorizationError:
             raise UnauthorizedCreation
         except Exception as e:

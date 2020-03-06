@@ -4,7 +4,7 @@ class InternalServerError(Exception):
 class SchemaValidationError(Exception):
     pass
 
-class EmpresaAlreadyExistError(Exception):
+class EmpresaAlreadyExistsError(Exception):
     pass
 
 class UpdatingEmpresaError(Exception):
