@@ -9,13 +9,6 @@ In the root directory of the project...
 ## Next Steps
 
 
-### Sample Data
-
-Replace the sample data stored in /server/sampleData.py.
-Replace the default images stored in /src/images.
-
-
-
 ### Adding a New Page
 
 1. Create a folder in `/src/components` with your react components.
