@@ -33,14 +33,20 @@ The front-end is served on http://localhost:8080/ and the back-end on http://loc
 
 ```
 .
-├── src - React front-end
-│ ├── components - React components for each page
-│ ├── App.jsx - React routing
-│ └── index.jsx - React root component
-├── server/ - Flask server that provides API routes and serves front-end
-│ ├── constants.py - Defines the constants for the endpoints and port
-│ ├── sampleData.py - Contains all sample text data for generate pages
-│ └── server.py - Configures Port and HTTP Server and provides API routes
+├── database 		- DB initialization and models
+├── resources/ 		- Flask server that provides API routes and serves front-end
+│ ├── auth.py 		- EndPoint for sessions
+│ ├── empresa.py 	- EndPoint for "empresas"
+│ ├── errors.py 	- Handler for errors
+│ ├── opinion.py 	- Endpoint for "opinions"
+│ └── routes.py 	- Contains all routes for pages
+├── src 			- React front-end
+│ ├── components 	- React components for each page
+│ ├── App.jsx 		- React routing
+│ └── index.jsx 	- React root component
+│── app.py 			- Configures Port and HTTP Server and JWT_SECRETE
+├── requirements.txt- Requirements for python
+├── package.json 	- You know
 └── README.md
 ```
 
