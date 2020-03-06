@@ -9,7 +9,7 @@ from resources.errors import errors
 
 app     = Flask(__name__)
 CORS(app)
-app.config['SECRET_KEY'] = 'My Super'
+app.config['SECRET_KEY'] = 'My Super secrete password'
 api     = Api(app, errors=errors)
 Bcrypt  = Bcrypt(app)
 jwt     = JWTManager(app)
