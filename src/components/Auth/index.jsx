@@ -9,7 +9,7 @@ export function deleteTokens(){
 export function requiredAuth(nextState, replace) {
   if (!isLoggedIn()) {
     replace({
-      pathname: '/empresas',
+      pathname: '/',
       state: { nextPathname: nextState.location.pathname }
     })
   }

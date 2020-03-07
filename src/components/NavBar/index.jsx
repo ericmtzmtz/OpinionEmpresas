@@ -2,10 +2,10 @@
 import { Link } from "react-router-dom";
 import styles from "./navbar.module.css";
 import { Button } from "react-bootstrap";
-import {isLoggedIn} from '../Auth'
+import {isLoggedIn, deleteTokens} from '../Auth'
 
 const handleLogout = () => {
-	localStorage.removeItem('token')
+	deleteTokens()
 	window.location.replace('/')
 }
 const NavBar = () => {

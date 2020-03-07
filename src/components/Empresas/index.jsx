@@ -5,6 +5,7 @@ import CONSTANTS from "../../constants";
 import axios from 'axios'
 import AlertMessage from "../Messages";
 
+const token = 'Bearer ' + localStorage.getItem('token')
 
 const Empresa = () => {
 	const [listItems, setListItems] = useState([]);
@@ -17,7 +18,7 @@ const Empresa = () => {
 			headers: {
 				'Accept': 'application/json',
 				'Content-Type': 'application/json;charset=UTF-8',
-				'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1ODM0MzI3MDIsIm5iZiI6MTU4MzQzMjcwMiwianRpIjoiYTllOTQ4MmEtOTVkOS00N2NmLTliZWQtNmJmNTRkMmY0MjEzIiwiZXhwIjoxNTg0MDM3NTAyLCJpZGVudGl0eSI6IjVlNjE0M2M4MzdjZjgwY2MxZmQ0N2FiMiIsImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.UenSRYYODmWT6qeDPu_VqxnKSWQWhNduEKkw4VK82ps'
+				'Authorization': token
 			}}).then(response => {
 	  		if(response.statusText !== 'OK'){
 		  		throw Error(response.statusText)
@@ -43,7 +44,7 @@ const Empresa = () => {
 			headers: {
 				'Accept': 'application/json',
 				'Content-Type': 'application/json;charset=UTF-8',
-				'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1ODM0MzI3MDIsIm5iZiI6MTU4MzQzMjcwMiwianRpIjoiYTllOTQ4MmEtOTVkOS00N2NmLTliZWQtNmJmNTRkMmY0MjEzIiwiZXhwIjoxNTg0MDM3NTAyLCJpZGVudGl0eSI6IjVlNjE0M2M4MzdjZjgwY2MxZmQ0N2FiMiIsImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.UenSRYYODmWT6qeDPu_VqxnKSWQWhNduEKkw4VK82ps'
+				'Authorization': token
 			},
 			data: {
 				"name": nameEmpresa,
@@ -59,7 +60,14 @@ const Empresa = () => {
 				type: 'alert-success',
 				messageText: response.data.message
 			})
-			axios.get(CONSTANTS.ENDPOINT.LIST + '/api/empresas/' + response.data.id).then(response2 =>{
+			axios({
+				method:'GET',
+				url: CONSTANTS.ENDPOINT.LIST + '/api/empresas/' + response.data.id,
+				headers: {
+					'Accept': 'application/json',
+					'Content-Type': 'application/json;charset=UTF-8',
+					'Authorization': token
+				}}).then(response2 =>{
 				setListItems([response2.data, ...listItems])
 			})
 		})
@@ -79,20 +87,26 @@ const Empresa = () => {
 			headers: {
 				'Accept': 'application/json',
 				'Content-Type': 'application/json;charset=UTF-8',
-				'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1ODM0MzI3MDIsIm5iZiI6MTU4MzQzMjcwMiwianRpIjoiYTllOTQ4MmEtOTVkOS00N2NmLTliZWQtNmJmNTRkMmY0MjEzIiwiZXhwIjoxNTg0MDM3NTAyLCJpZGVudGl0eSI6IjVlNjE0M2M4MzdjZjgwY2MxZmQ0N2FiMiIsImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.UenSRYYODmWT6qeDPu_VqxnKSWQWhNduEKkw4VK82ps'
+				'Authorization': token
 			}
 		}
 		axios(options).then(response => {
 			if(response.statusText !== 'OK'){
 				throw Error(response.statusText)
 			}
-			console.log(response.data)
 			setAlertMessage({
 				messageOpen: true,
 				type: 'alert-success',
 				messageText: response.data.message
 			})
-			axios.get(CONSTANTS.ENDPOINT.LIST + '/api/empresas').then(response2 =>{
+			axios({
+				method:'GET',
+				url: CONSTANTS.ENDPOINT.LIST + '/api/empresas',
+				headers: {
+					'Accept': 'application/json',
+					'Content-Type': 'application/json;charset=UTF-8',
+					'Authorization': token
+				}}).then(response2 =>{
 				setListItems(response2.data)
 			})
 		})
