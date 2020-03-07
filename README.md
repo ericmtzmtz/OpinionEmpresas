@@ -22,7 +22,7 @@ The front-end is based on [create-react-app](https://github.com/facebook/create-
 
 The back-end is based on [Flask](https://github.com/pallets/flask).
 
-The front-end is served on http://localhost:8080/ and the back-end on http://localhost:3000/.
+The front-end is served on http://localhost:3000/ and the back-end on http://localhost:5000/.
 
 ```
 .
