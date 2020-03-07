@@ -12,14 +12,14 @@ const EmpresasForm = (params) =>{
 		setResumeEmpresa(e.target.value)
 	 }
 
-	  const handleSubmit = (e) => {
+	const handleSubmit = (e) => {
 		e.preventDefault();
 		params.addListItem(nameEmpresa, resumeEmpresa);
 		setNameEmpresa("");
 		setResumeEmpresa("")
-	  }
+	}
 
-	  return (
+	 return (
 		<form onSubmit={handleSubmit} className="my-3">
 			<div className="form-group">
 				<label htmlFor="NameEmpresa">Nombre de la empresa</label>
@@ -54,7 +54,7 @@ const EmpresasForm = (params) =>{
 				</button>
 			</div>
 		</form>
-	  );
+	);
 }
 
 export default EmpresasForm;

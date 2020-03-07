@@ -6,11 +6,19 @@ import axios from 'axios'
 import AlertMessage from "../Messages";
 
 
-const List = () => {
+const Empresa = () => {
 	const [listItems, setListItems] = useState([]);
 	const [alertMessage, setAlertMessage] = useState({messageOpen: false, type: "", messageText: ""})
-  	const getEmpresas = () =>{
-		let promiseList = axios.get(CONSTANTS.ENDPOINT.LIST + '/api/empresas').then(response => {
+	
+	const getEmpresas = () =>{
+		let promiseList = axios({
+			method:'GET',
+			url: CONSTANTS.ENDPOINT.LIST + '/api/empresas',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json;charset=UTF-8',
+				'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE1ODM0MzI3MDIsIm5iZiI6MTU4MzQzMjcwMiwianRpIjoiYTllOTQ4MmEtOTVkOS00N2NmLTliZWQtNmJmNTRkMmY0MjEzIiwiZXhwIjoxNTg0MDM3NTAyLCJpZGVudGl0eSI6IjVlNjE0M2M4MzdjZjgwY2MxZmQ0N2FiMiIsImZyZXNoIjpmYWxzZSwidHlwZSI6ImFjY2VzcyJ9.UenSRYYODmWT6qeDPu_VqxnKSWQWhNduEKkw4VK82ps'
+			}}).then(response => {
 	  		if(response.statusText !== 'OK'){
 		  		throw Error(response.statusText)
 	  		}
@@ -116,8 +124,9 @@ const List = () => {
 			})
 	  	);
   	}, []);
-
+	
   	return (
+		  
 		<main id="mainContent" className="container">
 	  		<div className="row">
 				<div className="col mt-5 p-0">
@@ -146,4 +155,4 @@ const List = () => {
   	);
 }
 
-export default List;
+export default Empresa;

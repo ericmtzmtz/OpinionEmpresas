@@ -10,9 +10,13 @@ from resources.errors import SchemaValidationError, EmpresaAlreadyExistsError,\
 
 
 class EmpresasApi(Resource):
+    @jwt_required
     def get(self):
-        empresas = Empresa.objects().to_json()
-        return Response(empresas, mimetype="application/json", status=200)
+        try:
+            empresas = Empresa.objects().to_json()
+            return Response(empresas, mimetype="application/json", status=200)
+        except NoAuthorizationError:
+            raise UnauthorizedCreation
 
     @jwt_required
     def post(self):
@@ -62,7 +66,8 @@ class EmpresaApi(Resource):
             raise DeletingEmpresaError
         except Exception:
             raise InternalServerError
-
+    
+    @jwt_required
     def get(self, id):
         try:
             empresa = Empresa.objects.get(id=id).to_json()

@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 const ListItem = ({ listItem, deleteListItem }) => {
   return (
     <div className="col-12 mb-3 border">
-		<div className="row bg-dark text-white">
+		<div className="row bg-primary text-white">
 			<div className="col-11">
 				<p className="mt-3">{listItem.name}</p>
 			</div>

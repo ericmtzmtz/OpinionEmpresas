@@ -4,9 +4,12 @@ import "./App.css";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 
-import Blank from "./components/Blank";
+import Login from "./components/Login";
+import {PrivateRoute} from './components/PrivateRoute'
+import {isLoggedIn} from './components/Auth'
+import Empresa from "./components/Empresas";
 
-import List from "./components/List";
+// const Home = () => <h3>Estas Logeeado</h3>
 
 //TODO Web Template Studio: Add routes for your new pages here.
 const App = () => {
@@ -14,8 +17,9 @@ const App = () => {
       <React.Fragment>
         <NavBar />
         <Switch>
-          <Route exact path = "/" component = { Blank } />
-          <Route path = "/List" component = { List } />
+		  <PrivateRoute exact isLoggedIn={isLoggedIn()} path='/empresas' component={Empresa}/>
+          <Route exact path = "/" component = { Login } />
+          {/* <Route path = "/empresas" component = { Empresa } /> */}
         </Switch>
         <Footer />
       </React.Fragment>
