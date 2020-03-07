@@ -32,7 +32,8 @@ class Opinion(db.Document):
 class User(db.Document):
     name        = db.StringField(required=True, max_length=30)
     email       = db.EmailField(required=True, unique=True)
-    password    = db.StringField(required=True, min_length=6)
+    password    = db.StringField(required=True, min_length=6, unique=True)
+    isStaff     = db.BooleanField(required=True)
     empresas    = db.ListField(db.ReferenceField('Empresa', reverse_delete_rule=db.PULL))
     opiniones   = db.ListField(db.ReferenceField('Opinion', reverse_delete_rule=db.PULL))
 

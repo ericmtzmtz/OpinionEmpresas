@@ -19,7 +19,7 @@ const NavBar = () => {
 				<div className="navbar-nav">
 					<Link className="nav-link" to="/">Home</Link>
 					<Link className="nav-link" to="/empresas">Empresas</Link>
-					<Link className="nav-link" to="#">Opiniones</Link>
+					<Link className="nav-link" to="/opinions">Opiniones</Link>
 					{isLoggedIn()?(
 					<Button className="bt bt-primary ml-2" type="submit" onClick={()=>handleLogout()}>Cerrar sesion</Button>
 					):''}

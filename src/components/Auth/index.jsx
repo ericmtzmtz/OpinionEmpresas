@@ -3,8 +3,7 @@ export function isLoggedIn() {
 }
 
 export function deleteTokens(){
-    localStorage.removeItem("token");
-    // localStorage.removeItem("username");
+    localStorage.clear();
 }
 export function requiredAuth(nextState, replace) {
   if (!isLoggedIn()) {

@@ -42,8 +42,17 @@ const Login = () => {
 			})
 
 			localStorage.setItem("token", response.data.token)
-			if (localStorage.getItem("token") !== null && localStorage.getItem("token")!=="undefined") {
+			localStorage.setItem('username', response.data.name)
+			localStorage.setItem('isStaff', response.data.isStaff)
+			if (
+				localStorage.getItem("token") !== null 
+				&& localStorage.getItem("token")!=="undefined" 
+				&& localStorage.getItem('isStaff') === "true") {
 				window.location.replace("/empresas")
+			}else if(localStorage.getItem("token") !== null 
+				&& localStorage.getItem("token")!=="undefined" 
+				&& localStorage.getItem('isStaff') === "false"){
+					window.location.replace('/opinions')
 			}else{
 				alert(response.data.error);
 			}

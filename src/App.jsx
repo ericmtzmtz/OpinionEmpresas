@@ -8,8 +8,8 @@ import Login from "./components/Login";
 import {PrivateRoute} from './components/PrivateRoute'
 import {isLoggedIn} from './components/Auth'
 import Empresa from "./components/Empresas";
+import Opinion from "./components/Opinions"
 
-// const Home = () => <h3>Estas Logeeado</h3>
 
 //TODO Web Template Studio: Add routes for your new pages here.
 const App = () => {
@@ -18,8 +18,8 @@ const App = () => {
         <NavBar />
         <Switch>
 		  <PrivateRoute exact isLoggedIn={isLoggedIn()} path='/empresas' component={Empresa}/>
+		  <PrivateRoute exact isLoggedIn={isLoggedIn()} path='/opinions' component={Opinion}/>
           <Route exact path = "/" component = { Login } />
-          {/* <Route path = "/empresas" component = { Empresa } /> */}
         </Switch>
         <Footer />
       </React.Fragment>
