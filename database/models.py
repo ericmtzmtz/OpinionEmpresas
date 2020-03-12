@@ -21,12 +21,12 @@ class Opinion(db.Document):
     )
 
     title       = db.StringField(required=True)
-    resume      = db.StringField(required=False)
+    resume      = db.StringField(required=True)
     publish_date= db.DateTimeField(default=datetime.datetime.now())
     points      = db.StringField(max_length=1, choices=puntuacion, required=True)
     ip          = db.StringField(required=False)
     added_by    = db.ReferenceField('User')
-    # empresa     = db.ReferenceField(Empresas)
+    empresa     = db.StringField(required=True)
 
 
 class User(db.Document):

@@ -7,14 +7,34 @@ from mongoengine.errors import FieldDoesNotExist, \
     NotUniqueError, DoesNotExist, ValidationError, InvalidQueryError
 from resources.errors import SchemaValidationError, EmpresaAlreadyExistsError,\
     EmpresaNotExistsError, InternalServerError, UpdatingEmpresaError, DeletingEmpresaError, UnauthorizedCreation
+import json
 
 
 class EmpresasApi(Resource):
     @jwt_required
     def get(self):
         try:
-            empresas = Empresa.objects().to_json()
-            return Response(empresas, mimetype="application/json", status=200)
+            responseEmpresas = []
+            for i in Empresa.objects():
+                user_id = get_jwt_identity()
+                user    = User.objects.get(id=user_id)
+                name    = user.name
+                isStaff = user.isStaff
+                if isStaff:
+                    datosEmpresa    = {
+                        '_id': str(i.id),
+                        'name': i.name,
+                        'resume': i.resume,
+                        'nameUser': name
+                    }
+                else:
+                    datosEmpresa    = {
+                        '_id': str(i.id),
+                        'name': i.name,
+                        'resume': i.resume,
+                    }
+                responseEmpresas.append(datosEmpresa)
+            return Response(json.dumps(responseEmpresas), mimetype="application/json", status=200)
         except NoAuthorizationError:
             raise UnauthorizedCreation
 

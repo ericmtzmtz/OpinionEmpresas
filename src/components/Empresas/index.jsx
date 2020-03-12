@@ -68,6 +68,7 @@ const Empresa = () => {
 					'Content-Type': 'application/json;charset=UTF-8',
 					'Authorization': token
 				}}).then(response2 =>{
+					console.log(response2)
 				setListItems([response2.data, ...listItems])
 			})
 		})
@@ -82,7 +83,7 @@ const Empresa = () => {
 
 	const deleteEmpresa = (listItem) => {
 		const options = {
-			url: CONSTANTS.ENDPOINT.LIST + '/api/empresas/' + listItem._id.$oid,
+			url: CONSTANTS.ENDPOINT.LIST + '/api/empresas/' + listItem._id,
 			method: 'DELETE',
 			headers: {
 				'Accept': 'application/json',
@@ -138,9 +139,9 @@ const Empresa = () => {
 			})
 	  	);
   	}, []);
-	
+	console.log(listItems)
+	 
   	return (
-		  
 		<main id="mainContent" className="container">
 	  		<div className="row">
 				<div className="col mt-5 p-0">
@@ -155,7 +156,7 @@ const Empresa = () => {
 							key={index}
 							listItem={listItem}
 							deleteListItem={deleteEmpresa}
-						/> :''
+						/> :'Aun no hay empresas'
 					
 				))}
 				<AlertMessage

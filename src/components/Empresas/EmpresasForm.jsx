@@ -20,7 +20,7 @@ const EmpresasForm = (params) =>{
 	}
 
 	 return (
-		<form onSubmit={handleSubmit} className="my-3">
+		<form onSubmit={handleSubmit} className="my-3 text-left">
 			<div className="form-group">
 				<label htmlFor="NameEmpresa">Nombre de la empresa</label>
 				<input
