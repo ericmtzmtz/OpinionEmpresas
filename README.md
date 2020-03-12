@@ -1,4 +1,5 @@
 ## Getting Started
+* You need to have npm and python 3 installed
 
 In the root directory of the project...
 
