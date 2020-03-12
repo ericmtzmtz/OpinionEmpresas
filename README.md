@@ -1,5 +1,5 @@
 ## Getting Started
-* You need to have npm and python 3 installed
+* You need to have node, npm and python 3 installed
 
 In the root directory of the project...
 
