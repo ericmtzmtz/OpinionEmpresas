@@ -1,46 +1,46 @@
 {
-  "name": "frontend",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.4.1",
-    "@testing-library/user-event": "^7.2.1",
-    "axios": "^0.19.2",
-    "bootstrap": "^4.4.1",
-    "react": "^16.13.0",
-    "react-bootstrap": "^1.0.0-beta.17",
-    "react-dom": "^16.13.0",
-    "react-router-dom": "^5.1.2",
-    "react-scripts": "3.4.0"
-  },
-  "devDependencies": {
-    "concurrently": "5.0.2"
-  },
-  "scripts": {
-    "start": "concurrently \"yarn start-frontend || npm run start-frontend\" \"yarn start-backend || npm run start-backend\"",
-    "start-backend": "concurrently \"py -3 -m pip install -r requirements.txt || python3 -m pip install -r requirements.txt\" \"yarn start-flask || npm run start-flask\"",
-	"start-flask":  "python3 app.py || py -3 app.py",
-    "install-requirements": "pip install -r server/requirements.txt",
-    "start-frontend": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "proxy": "http://localhost:5000",
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+	"name": "frontend",
+	"version": "0.1.0",
+	"private": true,
+	"dependencies": {
+		"@testing-library/jest-dom": "^4.2.4",
+		"@testing-library/react": "^9.4.1",
+		"@testing-library/user-event": "^7.2.1",
+		"axios": "^0.19.2",
+		"bootstrap": "^4.4.1",
+		"react": "^16.13.0",
+		"react-bootstrap": "^1.0.0-beta.17",
+		"react-dom": "^16.13.0",
+		"react-router-dom": "^5.1.2",
+		"react-scripts": "3.4.0"
+	},
+	"devDependencies": {
+		"concurrently": "5.0.2"
+	},
+	"scripts": {
+		"start": "concurrently \"yarn start-frontend || npm run start-frontend\" \"yarn start-backend || npm run start-backend\"",
+		"start-backend": "concurrently \"py -3 -m pip install -r requirements.txt || python3 -m pip install -r requirements.txt\" \"yarn start-flask || npm run start-flask\"",
+		"start-flask": "python3 app.py || py -3 app.py",
+		"install-requirements": "pip install -r requirements.txt",
+		"start-frontend": "react-scripts start",
+		"build": "react-scripts build",
+		"test": "react-scripts test",
+		"eject": "react-scripts eject"
+	},
+	"eslintConfig": {
+		"extends": "react-app"
+	},
+	"proxy": "http://localhost:5000",
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
+	}
 }
